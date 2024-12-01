@@ -105,7 +105,7 @@ tumorlabel=<your-labelpath>
 python train.py dataset.name=liver_tumor_train dataset.data_root_path=$datapath dataset.label_root_path=$tumorlabel dataset.dataset_list=['liver'] dataset.uniform_sample=False model.results_folder_postfix="liver"  model.vqgan_ckpt=$vqgan_ckpt
 ```
 
-We offer the pre-trained checkpoints of Diffusion Model, which were trained for early-stage and mid-/late- stage tumors for liver, pancreas and kidney, respectively. This checkpoint can be directly used for STEP3 if you do not want to re-train the Diffusion Model. Simply download it to `STEP3.SegmentationModel/TumorGeneration/model_weight`
+We offer the pre-trained checkpoints of Diffusion Model, which were trained for early-stage and mid-/late- stage tumors for liver, pancreas and kidney, respectively. This checkpoint can be directly used for STEP3 if you do not want to re-train the Diffusion Model. Simply download it to `Segmentation/TumorGeneration/model_weight`
 
 ### 🔗 Checkpoints Overview
 
@@ -178,14 +178,31 @@ datafold_dir=cross_eval/"$organ"_aug_data_fold/
 python -W ignore validation.py --model=unet --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
 ```
 
-We also provide the singularity container for DiffTumor in [HuggingFace 🤗]
+## 🛠️ Using the Singularity Container for TextoMorph
+
+We provide a **Singularity container** for running **TextoMorph** tasks, which supports both text-driven tumor synthesis and segmentation (organ, tumor). Follow the instructions below to get started.
+
+
+### 1️⃣ Text-Driven Tumor Synthesis
+
+To generate tumors based on textual descriptions, use the following command:
+
 ```bash
+inputs_data=/path/to/your/healthyCT
+inputs_label=liver          # Example: pancreas, kidney
+text="The liver contains arterial enhancement and washout."
+outputs_data=/path/to/your/output/Text-Driven-Tumor
+
+SINGULARITYENV_CUDA_VISIBLE_DEVICES=0 singularity run --nv -B $inputs_data:/workspace/inputs -B $outputs_data:/workspace/outputs textomerph.sif
+```
+### 1️⃣ Segmentation (Organ, Tumor)
+To perform organ or tumor segmentation on CT scans, use the following command:
+```bash
+
 inputs_data=/path/to/your/CT/scan/folders
 outputs_data=/path/to/your/output/folders
 
-# wget https://huggingface.co/qicq1c/DiffTumor/resolve/main/difftumor_final.sif
 SINGULARITYENV_CUDA_VISIBLE_DEVICES=0 singularity run --nv -B $inputs_data:/workspace/inputs -B $outputs_data:/workspace/outputs textomerph.sif
 ```
-
 ## Acknowledgments
 This work was supported by the Lustgarten Foundation for Pancreatic Cancer Research and the Patrick J. McGovern Foundation Award.
