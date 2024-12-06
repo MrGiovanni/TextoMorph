@@ -93,7 +93,7 @@ We offer the pre-trained checkpoint of the **Autoencoder Model**, which was trai
 This checkpoint can be directly used for the Diffusion model if you do not want to re-train the Autoencoder Model. Simply download it to `Diffusion/pretrained_models/AutoencoderModel.ckpt` by running the following command:
 
 ```bash
-cd Diffusion/pretrained_models/
+cd Diffusion/pretrained_models
 wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/AutoencoderModel.ckpt
 ```
 ### 🔧 Start training.
@@ -102,7 +102,7 @@ cd Diffusion/
 vqgan_ckpt=<pretrained-AutoencoderModel> (e.g., /pretrained_models/AutoencoderModel.ckpt)
 datapath=<your-datapath> 
 tumorlabel=<your-labelpath> 
-python train.py dataset.name=liver_tumor_train dataset.data_root_path=$datapath dataset.label_root_path=$tumorlabel dataset.dataset_list=['liver'] dataset.uniform_sample=False model.results_folder_postfix="liver"  model.vqgan_ckpt=$vqgan_ckpt
+python train.py dataset.name=liver_tumor dataset.data_root_path=$datapath dataset.label_root_path=$tumorlabel dataset.dataset_list=['liver'] dataset.uniform_sample=False model.results_folder_postfix="liver"  model.vqgan_ckpt=$vqgan_ckpt
 ```
 
 We offer the pre-trained checkpoints of Diffusion Model, which were trained for early-stage and mid-/late- stage tumors for liver, pancreas and kidney, respectively. This checkpoint can be directly used for STEP3 if you do not want to re-train the Diffusion Model. Simply download it to `Segmentation/TumorGeneration/model_weight`
