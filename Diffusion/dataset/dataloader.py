@@ -351,7 +351,7 @@ def get_loader(args):
         train_img, train_lbl, train_text, train_name = [], [], [], []
 
         for item in args.dataset_list:
-            img, lbl, text, name = load_data(os.path.join(args.data_txt_path, item, f'real_tumor_train_{args.fold}.txt'),
+            img, lbl, text, name = load_data(os.path.join(args.data_txt_path, item, f'real_tumor.txt'),
                                              args.data_root_path, args.label_root_path)
             train_img.extend(img)
             train_lbl.extend(lbl)
