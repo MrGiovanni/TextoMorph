@@ -100,9 +100,9 @@ wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/A
 
 Due to licensing constraints, we are unable to provide the training CT datasets. However, to assist in training your own model, we have made the **descriptive words** used during training available in the following folders:
 
-- `Diffusion/cross_eval/liver`
-- `Diffusion/cross_eval/pancreas`
-- `Diffusion/cross_eval/kidney`
+- [📁 Diffusion/cross_eval/liver](https://github.com/MrGiovanni/TextoMorph/tree/main/Diffusion/cross_eval/liver)
+- [📁 Diffusion/cross_eval/pancreas](https://github.com/MrGiovanni/TextoMorph/tree/main/Diffusion/cross_eval/pancreas)
+- [📁 Diffusion/cross_eval/kidney](https://github.com/MrGiovanni/TextoMorph/tree/main/Diffusion/cross_eval/kidney)
 
 Each folder contains corresponding `real_tumor.txt` files with descriptive text data.
 
