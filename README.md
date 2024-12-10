@@ -96,6 +96,23 @@ This checkpoint can be directly used for the Diffusion model if you do not want 
 cd Diffusion/pretrained_models
 wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/AutoencoderModel.ckpt
 ```
+### 💡 Note: Training Dataset Availability
+
+Due to licensing constraints, we are unable to provide the training CT datasets. However, to assist in training your own model, we have made the **descriptive words** used during training available in the following folders:
+
+- `Diffusion/cross_eval/liver`
+- `Diffusion/cross_eval/pancreas`
+- `Diffusion/cross_eval/kidney`
+
+Each folder contains corresponding `real_tumor.txt` files with descriptive text data.
+
+### 📝 How to Train Your Own Model
+
+If you wish to train your own model, you can rewrite these `real_tumor.txt` files using the following format:
+
+```plaintext
+CT_id  Label_id  t1  t2  ...  t100
+```
 ### 🔧 Start training.
 ```bash
 cd Diffusion/
@@ -105,7 +122,7 @@ tumorlabel=<your-labelpath>
 python train.py dataset.name=liver_tumor dataset.data_root_path=$datapath dataset.label_root_path=$tumorlabel dataset.dataset_list=['liver'] dataset.uniform_sample=False model.results_folder_postfix="liver"  model.vqgan_ckpt=$vqgan_ckpt
 ```
 
-We offer the pre-trained checkpoints of Diffusion Model, which were trained for early-stage and mid-/late- stage tumors for liver, pancreas and kidney, respectively. This checkpoint can be directly used for STEP3 if you do not want to re-train the Diffusion Model. Simply download it to `Segmentation/TumorGeneration/model_weight`
+We offer the pre-trained checkpoints of Diffusion Model for liver, pancreas and kidney, respectively. This checkpoint can be directly used for segmentation if you do not want to re-train the Diffusion Model. Simply download it to `Segmentation/TumorGeneration/model_weight`
 
 ### 🔗 Checkpoints Overview
 
