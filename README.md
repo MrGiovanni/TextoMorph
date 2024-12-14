@@ -1,9 +1,11 @@
-# Text-Driven Tumor Synthesis
-Current tumor synthesis methods lack precise control over specific characteristics, resulting in similar or duplicate examples that fail to effectively enhance AI performance. We introduce TextoMorph, a novel text-driven approach that allows detailed textual control over tumor features such as texture, heterogeneity, boundaries, and pathology type to improve AI training.
 <div align="center">
   <img src="/utils/fig_cloudplot.png" alt="fig_cloudplot" width="600"/>
 </div>
+Current tumor synthesis methods lack precise control over specific characteristics, resulting in similar or duplicate examples that fail to effectively enhance AI performance. We introduce TextoMorph, a novel text-driven approach that allows detailed textual control over tumor features such as texture, heterogeneity, boundaries, and pathology type to improve AI training.
 
+## Paper
+
+<b>Text-Driven Tumor Synthesis</b> <br/>
 [Xinran Li](https://scholar.google.com/citations?hl=zh-CN&user=awRZX_gAAAAJ)<sup>1,2</sup>, [Yi Shuai](https://openreview.net/profile?id=~Yi_Shuai1)<sup>3</sup>, [Chen Liu](https://scholar.google.com/citations?user=i938yiEAAAAJ&hl=zh-CN)<sup>1,4</sup>, [Qi Chen](https://scholar.google.com/citations?user=4Q5gs2MAAAAJ&hl=en)<sup>1,5</sup>, [Qilong Wu](https://github.com/JerryWu-code)<sup>1,6</sup>, [Pengfei Guo](https://scholar.google.co.uk/citations?hl=en&pli=1&user=_IAp-bYAAAAJ)<sup>7</sup>, [Dong Yang](https://scholar.google.com/citations?user=PHvliUgAAAAJ&hl=en&oi=sra)<sup>7</sup>,  
 [Can Zhao](https://scholar.google.com/citations?user=CdzhxtYAAAAJ&hl=en)<sup>7</sup>, [Pedro R. A. S. Bassi](https://scholar.google.com/citations?hl=zh-CN&user=NftgL6gAAAAJ)<sup>1,8,9</sup>, [Daguang Xu](https://research.nvidia.com/person/daguang-xu)<sup>7</sup>, [Kang Wang](https://radiology.ucsf.edu/people/kang-wang)<sup>10</sup>, [Yang Yang](https://scholar.google.com/citations?user=6XsJUBIAAAAJ&hl=zh-CN)<sup>10</sup>, [Alan Yuille](https://www.cs.jhu.edu/~ayuille/)<sup>1</sup>, [Zongwei Zhou](https://www.zongweiz.com/)<sup>1,*</sup>  
 
