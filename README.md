@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="/utils/fig_cloudplot.png" alt="fig_cloudplot" width="600"/>
+  <img src="/utils/fig_cloudplot.png" alt="fig_cloudplot"/>
 </div>
 Current tumor synthesis methods lack precise control over specific characteristics, resulting in similar or duplicate examples that fail to effectively enhance AI performance. We introduce TextoMorph, a novel text-driven approach that allows detailed textual control over tumor features such as texture, heterogeneity, boundaries, and pathology type to improve AI training.
 
