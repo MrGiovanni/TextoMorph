@@ -35,7 +35,7 @@ Begin by cloning the project repository to your local machine using the followin
 git clone https://github.com/MrGiovanni/TextoMorph.git
 cd TextoMorph
 ```
-See [installation and dataset download instructions](utils/INSTALL.md)
+See [installation](utils/INSTALL.md) to obtain requirements and download dataset.
 
 
 ## STEP 1. 🚀 Train Diffusion Model
