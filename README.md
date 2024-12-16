@@ -49,7 +49,7 @@ wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/A
 ```
 ### 💡 How to Train Your Own Model
 
-Due to licensing constraints, we are unable to provide the training CT datasets. However, to assist in training your own model, we have made the **descriptive words** used during training available in the following folders:
+Due to licensing constraints, we are unable to provide the training CT datasets. However, to assist in training your own model, we have made the **descriptive words** used during training available in the following files:
 
 - [📁 liver](https://github.com/MrGiovanni/TextoMorph/tree/main/Diffusion/cross_eval/liver/real_tumor.txt)
 - [📁 pancreas](https://github.com/MrGiovanni/TextoMorph/tree/main/Diffusion/cross_eval/pancreas/real_tumor.txt)
@@ -130,7 +130,7 @@ python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-
 | **Pancreas**   | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descriptivetumor2/pancreas.pt) |
 | **Kidney**     | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descriptivetumor2/kidney.pt) |
 
-## STEP 3. Evaluation
+## STEP 3. 🚀 Evaluation
 
 
 ```bash
