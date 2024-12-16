@@ -28,7 +28,7 @@ Current tumor synthesis methods lack precise control over specific characteristi
 **We have summarized publications related to tumor synthesis in [Awesome Synthetic Tumors](https://github.com/MrGiovanni/SyntheticTumors/blob/main/AWESOME.md) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re).**
 
 
-## ⚙️ Requirements
+## 📥 Installation
 Begin by cloning the project repository to your local machine using the following command:
 
 ```bash
