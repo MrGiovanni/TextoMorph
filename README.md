@@ -47,7 +47,7 @@ This checkpoint can be directly used for the Diffusion model if you do not want 
 cd Diffusion/pretrained_models
 wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/AutoencoderModel.ckpt
 ```
-### 💡 Note: Training Dataset Availability
+### 💡 How to Train Your Own Model
 
 Due to licensing constraints, we are unable to provide the training CT datasets. However, to assist in training your own model, we have made the **descriptive words** used during training available in the following folders:
 
@@ -56,8 +56,6 @@ Due to licensing constraints, we are unable to provide the training CT datasets.
 - [📁 Diffusion/cross_eval/kidney](https://github.com/MrGiovanni/TextoMorph/tree/main/Diffusion/cross_eval/kidney)
 
 Each folder contains corresponding `real_tumor.txt` files with descriptive text data.
-
-### 📝 How to Train Your Own Model
 
 If you wish to train your own model, you can rewrite these `real_tumor.txt` files using the following format:
 
