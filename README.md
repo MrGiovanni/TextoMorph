@@ -91,13 +91,10 @@ Follow the instructions below to ensure the proper setup of your directory struc
 Run the following commands to download the pre-trained weights:
 
 ```bash
-# Navigate to the model weights directory
-cd Segmentation/TumorGeneration/model_weight
 
-# Download the Autoencoder Model checkpoint
+cd Segmentation/TumorGeneration/model_weight
 wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/AutoencoderModel.ckpt
 
-# Download tumor-specific checkpoints
 wget https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descriptivetumor2/liver.pt
 wget https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descriptivetumor2/pancreas.pt
 wget https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descriptivetumor2/kidney.pt
@@ -126,9 +123,9 @@ python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-
 
 | **Model**           | **Download**                                                                                 |
 |----------------------|---------------------------------------------------------------------------------------------------|
-| **Liver**     | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descriptivetumor2/liver.pt) |
-| **Pancreas**   | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descriptivetumor2/pancreas.pt) |
-| **Kidney**     | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descriptivetumor2/kidney.pt) |
+| **Liver**     | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/liver.pt) |
+| **Pancreas**   | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/pancreas.pt) |
+| **Kidney**     | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/kidney.pt) |
 
 ## STEP 3. 🚀 Evaluation
 
