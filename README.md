@@ -63,9 +63,9 @@ CT_id  Label_id  t1  t2  ...  t100
 ### 🔧 Start training.
 ```bash
 cd Diffusion/
-vqgan_ckpt=<pretrained-AutoencoderModel> (e.g., /pretrained_models/AutoencoderModel.ckpt)
-datapath=<your-datapath> 
-tumorlabel=<your-labelpath> 
+vqgan_ckpt="pretrained_models/AutoencoderModel.ckpt" # your-datapath
+datapath="/ccvl/net/ccvl15/xinran/CT/" # your-datapath
+tumorlabel="/ccvl/net/ccvl15/xinran/Tumor/liver/" # your-datapath
 python train.py dataset.name=liver_tumor dataset.data_root_path=$datapath dataset.label_root_path=$tumorlabel dataset.dataset_list=['liver'] dataset.uniform_sample=False model.results_folder_postfix="liver"  model.vqgan_ckpt=$vqgan_ckpt
 ```
 
@@ -105,8 +105,8 @@ cd ../..
 ```bash
 cd Segmentation
 
-healthy_datapath=<your-datapath>
-datapath=<your-datapath>
+healthy_datapath=/ccvl/net/ccvl15/xinran/
+datapath=/ccvl/net/ccvl15/xinran/
 cache_rate=1.0
 batch_size=12
 val_every=50
