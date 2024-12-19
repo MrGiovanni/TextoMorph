@@ -52,3 +52,29 @@ cat healthy_ct.zip* > HealthyCT.zip
 rm -rf healthy_ct.zip* cache
 unzip -o -q HealthyCT.zip -d /HealthyCT
 ```
+## 🛠️ Using the Singularity Container for TextoMorph
+
+We provide a **Singularity container** for running **TextoMorph** tasks, which supports both text-driven tumor synthesis and segmentation (organ, tumor). Follow the instructions below to get started.
+
+
+### 1️⃣ Text-Driven Tumor Synthesis
+
+To generate tumors based on textual descriptions, use the following command:
+
+```bash
+inputs_data=/path/to/your/healthyCT
+inputs_label=liver          # Example: pancreas, kidney
+text="The liver contains arterial enhancement and washout."
+outputs_data=/path/to/your/output/Text-Driven-Tumor
+
+SINGULARITYENV_CUDA_VISIBLE_DEVICES=0 singularity run --nv -B $inputs_data:/workspace/inputs -B $outputs_data:/workspace/outputs textomerph.sif
+```
+### 1️⃣ Segmentation (Organ, Tumor)
+To perform organ or tumor segmentation on CT scans, use the following command:
+```bash
+
+inputs_data=/path/to/your/CT/scan/folders
+outputs_data=/path/to/your/output/folders
+
+SINGULARITYENV_CUDA_VISIBLE_DEVICES=0 singularity run --nv -B $inputs_data:/workspace/inputs -B $outputs_data:/workspace/outputs textomerph.sif
+```
