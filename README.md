@@ -105,8 +105,8 @@ cd ../..
 ```bash
 cd Segmentation
 
-healthy_datapath=/ccvl/net/ccvl15/xinran/
-datapath=/ccvl/net/ccvl15/xinran/
+healthy_datapath=/ccvl/net/ccvl15/xinran/ # your-datapath
+datapath=/ccvl/net/ccvl15/xinran/ # your-datapath
 cache_rate=1.0
 batch_size=12
 val_every=50
