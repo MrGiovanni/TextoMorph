@@ -484,25 +484,21 @@ class Unet3D(nn.Module):
     ):
         super().__init__()
         self.channels = channels
-        self.dim = dim  # 添加这一行，保存 dim
-        self.init_dim = default(init_dim, dim)  # 保存 init_dim 为实例属性
+        self.dim = dim 
+        self.init_dim = default(init_dim, dim) 
         self.init_kernel_size = init_kernel_size
         self.use_cross_attention = use_cross_attention
         
-        # Initialize CLIP model and tokenizer
         self.clip_model = CLIPModel.from_pretrained(clip_model_name)
         self.tokenizer = CLIPTokenizer.from_pretrained(clip_model_name)
 
-        # temporal attention and its relative positional encoding
         rotary_emb = RotaryEmbedding(min(32, attn_dim_head))
 
         def temporal_attn(dim): 
             return EinopsToAndFrom('b c f h w', 'b (h w) f c', Attention(dim, heads=attn_heads, dim_head=attn_dim_head, rotary_emb=rotary_emb))
 
-        # time relative position bias
         self.time_rel_pos_bias = RelativePositionBias(heads=attn_heads, max_distance=32)
 
-        # initial conv
         init_dim = default(init_dim, dim)
         assert is_odd(init_kernel_size)
 
@@ -510,17 +506,14 @@ class Unet3D(nn.Module):
 
         self.init_conv = nn.Conv3d(26, init_dim, (1, init_kernel_size, init_kernel_size), padding=(0, init_padding, init_padding))
 
-        #self.init_conv = nn.Conv3d(channels, init_dim, (1, init_kernel_size, init_kernel_size), padding=(0, init_padding, init_padding))
         if self.use_cross_attention:
             self.cross_attn = CrossAttention(dim=self.dim, heads=8, dim_head=64)
     
         self.init_temporal_attn = Residual(PreNorm(init_dim, temporal_attn(init_dim)))
 
-        # dimensions
         dims = [init_dim, *map(lambda m: dim * m, dim_mults)]
         in_out = list(zip(dims[:-1], dims[1:]))
 
-        # time conditioning
         time_dim = dim * 4
         self.time_mlp = nn.Sequential(
             SinusoidalPosEmb(dim),
@@ -529,7 +522,6 @@ class Unet3D(nn.Module):
             nn.Linear(time_dim, time_dim)
         )
 
-        # text conditioning
         self.has_cond = exists(cond_dim) or use_bert_text_cond
         cond_dim = BERT_MODEL_DIM if use_bert_text_cond else cond_dim
 
@@ -539,13 +531,11 @@ class Unet3D(nn.Module):
         cond_dim = time_dim + int(cond_dim or 0)
         
         
-        # layers
         self.downs = nn.ModuleList([])
         self.ups = nn.ModuleList([])
 
         num_resolutions = len(in_out)
 
-        # block type
         block_klass = partial(ResnetBlock, groups=resnet_groups)
         block_klass_cond = partial(block_klass, time_emb_dim=cond_dim)
 
@@ -928,8 +918,44 @@ class GaussianDiffusion(nn.Module):
         ).mean()
 
         return contrastive_loss
+    def get_cond(self, img, mask, text, device):
+  
+        bs = img.shape[0]
+        mask_ = (1 - mask).detach()
+        masked_img = (img * mask_).detach()
+        masked_img = masked_img.permute(0, 1, -1, -3, -2)
+        img = img.permute(0, 1, -1, -3, -2)
+        mask = mask.permute(0, 1, -1, -3, -2)
 
-    def p_losses(self, x_start, t, cond=None, text=None, noise=None, **kwargs):
+        if isinstance(self.vqgan, VQGAN):
+            with torch.no_grad():
+                img_vq = self.vqgan.encode(img, quantize=False, include_embeddings=True)
+                img_vq = ((img_vq - self.vqgan.codebook.embeddings.min()) / 
+                      (self.vqgan.codebook.embeddings.max() - self.vqgan.codebook.embeddings.min())) * 2.0 - 1.0
+
+                masked_img_vq = self.vqgan.encode(masked_img, quantize=False, include_embeddings=True)
+                masked_img_vq = ((masked_img_vq - self.vqgan.codebook.embeddings.min()) / 
+                             (self.vqgan.codebook.embeddings.max() - self.vqgan.codebook.embeddings.min())) * 2.0 - 1.0
+        else:
+            img_vq = normalize_img(img)
+            masked_img_vq = normalize_img(masked_img)
+
+        mask = mask * 2.0 - 1.0
+        cc = torch.nn.functional.interpolate(mask, size=masked_img_vq.shape[-3:])
+        cond = torch.cat((masked_img_vq, cc), dim=1)
+
+        if text is not None:
+            inputs = self.denoise_fn.tokenizer(text, return_tensors="pt", padding=True, truncation=True).to(device)
+            text_embeddings = self.denoise_fn.clip_model.get_text_features(**inputs)
+            text_proj = nn.Linear(text_embeddings.shape[-1], cond.shape[1]).to(device)
+            text_embeddings = text_proj(text_embeddings)
+            text_embeddings = text_embeddings.unsqueeze(-1).unsqueeze(-1).unsqueeze(-1)
+            text_embeddings = text_embeddings.expand(-1, -1, cond.shape[2], cond.shape[3], cond.shape[4])
+            cond = torch.cat((cond, text_embeddings), dim=1)
+
+        return cond
+
+    def p_losses(self, x_start, t, cond=None, text=None, noise=None, img_sim=None, mask_sim=None, text_sim=None, **kwargs):
         b, c, f, h, w, device = *x_start.shape, x_start.device
         noise = default(noise, lambda: torch.randn_like(x_start))
         x_noisy = self.q_sample(x_start=x_start, t=t, noise=noise)
@@ -945,18 +971,23 @@ class GaussianDiffusion(nn.Module):
         else:
             raise NotImplementedError()
 
-        img1 = self.p_sample_loop(x_start.shape, cond=cond, text=text)
-
+        cond_sim = None
+        if img_sim is not None and mask_sim is not None and text_sim is not None:
+            cond_sim = self.get_cond(img_sim, mask_sim, text_sim, device)
+        contrastive_loss_dissim = 0
         text2 = self.get_another_report(text)
-        img2 = self.p_sample_loop(x_start.shape, cond=cond, text=text2)
+        if text2 is not None:
+            img1 = self.p_sample_loop(x_start.shape, cond=cond, text=text)
+            img2 = self.p_sample_loop(x_start.shape, cond=cond, text=text2)
+            contrastive_loss_dissim = self.contrastive_loss_3d(img1, img2, temperature=self.contrastive_temp)
+        contrastive_loss_sim=0
+        if cond_sim is not None:
+            img3 = self.p_sample_loop(x_start.shape, cond=cond_sim, text=text_sim)
+            contrastive_loss_sim = self.contrastive_loss_3d(img1, img3, temperature=self.contrastive_temp)
 
-        contrastive_loss = self.contrastive_loss_3d(img1, img2, temperature=self.contrastive_temp)
-
-        total_loss = loss + contrastive_loss*self.contrastive_weight
+        total_loss = loss + self.contrastive_weight * (contrastive_loss_dissim - contrastive_loss_sim)
 
         return total_loss
-
-
 
     def forward(self, x, cond=None, text=None, return_cond=False, *args, **kwargs):
         bs = int(x.shape[0] / 2)
@@ -1099,15 +1130,6 @@ class Trainer(object):
 
         self.reset_parameters()
 
-        # Initialize live plot
-        plt.ion()  # 开启交互式绘图，便于实时更新
-        self.fig, self.ax = plt.subplots()  # 创建一个图形和轴
-        self.loss_line, = self.ax.plot([], [], label='Train Loss')  # 初始化损失曲线
-        self.ax.set_xlabel('Training Steps')  # 设置x轴标签
-        self.ax.set_ylabel('Loss')  # 设置y轴标签
-        self.ax.set_title('Training Loss Over Time')  # 设置标题
-        self.ax.legend()  # 添加图例
-        plt.show(block=False)  # 非阻塞显示图像
 
     def reset_parameters(self):
         self.ema_model.load_state_dict(self.model.state_dict())
@@ -1115,13 +1137,10 @@ class Trainer(object):
     def step_ema(self):
         """ Update EMA, ensuring it starts at step_start_ema """
         if self.step == self.step_start_ema:
-            # Compare model and ema_model keys before synchronization
             model_dict = self.model.state_dict()
             ema_model_dict = self.ema_model.state_dict()
 
-            # Find keys that are in model but not in ema_model
             missing_in_ema = [k for k in model_dict if k not in ema_model_dict]
-            # Find keys that are in ema_model but not in model
             missing_in_model = [k for k in ema_model_dict if k not in model_dict]
 
             if missing_in_ema:
@@ -1129,7 +1148,6 @@ class Trainer(object):
             if missing_in_model:
                 print(f"Keys in ema_model but not in model: {missing_in_model}")
 
-            # First EMA update: manually synchronize ema_model with model
             self.ema_model.load_state_dict(self.model.state_dict(), strict=False)
         elif self.step >= self.step_start_ema:
 
@@ -1158,6 +1176,24 @@ class Trainer(object):
             self.ema_model.load_state_dict(data['ema'], **kwargs)
             self.scaler.load_state_dict(data['scaler'])
 
+    def get_similar(self, current_name, keyword):
+        for item in self.dl:
+            if item['name'] == current_name:
+                continue
+            
+            text_data = item.get('text', [])
+            if not isinstance(text_data, list):
+                continue
+
+            for single_text in text_data:
+                if keyword in single_text:
+                    image = item['image'].cuda() if isinstance(item['image'], torch.Tensor) else torch.tensor(item['image']).float().cuda()
+                    mask = item['label'].cuda() if isinstance(item['label'], torch.Tensor) else torch.tensor(item['label']).float().cuda()
+                    mask[mask == 1] = 0
+                    mask[mask == 2] = 1
+                    return image, mask, text_data[:10]        
+        return None, None, None
+
     def train(self, prob_focus_present=0., focus_present_mask=None, log_fn=lambda x: x):
         best_train_loss = float('inf')
         while self.step < self.train_num_steps:
@@ -1165,20 +1201,40 @@ class Trainer(object):
                 data = next(self.dl)
                 image = data['image'].cuda()
                 mask = data['label'].cuda()
-                text = data.get('text', None)  # 获取文本数据
-
-                # 调整掩码值
+                text = data.get('text', None)  
+                name = data.get('name', None) 
+                name = name[0]
                 mask[mask == 1] = 0
                 mask[mask == 2] = 1
 
                 input_data = torch.cat([image, mask], dim=0)
+                keyword = None
+                keywords = [
+                    "cyst", "hypoattenuating", "hypodensity", "hyperattenuating",
+                    "heterogeneous enhancement", "arterial enhancement", "washout",
+                    "cirrhosis", "metastases", "ill-defined", "well-defined"
+                ]
+                if text is not None and len(text) > 0:
+                    chosen_text_line = random.choice(text)  
+                    for kw in keywords:
+                        if kw in chosen_text_line:
+                            keyword = kw
+                            break
+                image_sim = None
+                mask_sim = None
+                text_sim_line = None
+                if keyword is not None:
+                    image_sim, mask_sim, text_sim_line = self.get_similar(name, keyword)
 
                 with autocast(enabled=self.amp):
                     loss = self.model(
                         input_data,
                         prob_focus_present=prob_focus_present,
                         focus_present_mask=focus_present_mask,
-                        text=text
+                        text=text,
+                        img_sim=image_sim,
+                        mask_sim=mask_sim,
+                        text_sim=text_sim_line
                     )
 
                     self.scaler.scale(loss / self.gradient_accumulate_every).backward()
@@ -1213,7 +1269,6 @@ class Trainer(object):
             self.step += 1
 
         print('Training completed')
-
 
 class Tester(object):
     def __init__(

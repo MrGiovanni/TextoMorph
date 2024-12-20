@@ -46,6 +46,7 @@ This checkpoint can be directly used for the Diffusion model if you do not want 
 ```bash
 cd Diffusion/pretrained_models
 wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/AutoencoderModel.ckpt
+cd ../..
 ```
 ### 💡 How to Train Your Own Model
 
@@ -105,8 +106,8 @@ cd ../..
 ```bash
 cd Segmentation
 
-healthy_datapath=/ccvl/net/ccvl15/xinran/ # your-datapath
-datapath=/ccvl/net/ccvl15/xinran/ # your-datapath
+healthy_datapath="/ccvl/net/ccvl15/xinran/" # your-datapath
+datapath="/ccvl/net/ccvl15/xinran/" # your-datapath
 cache_rate=1.0
 batch_size=12
 val_every=50
@@ -132,7 +133,7 @@ python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-
 
 ```bash
 cd Segmentation
-datapath=<your-datapath>
+datapath="/ccvl/net/ccvl15/xinran/" #your-datapath
 organ=liver
 fold=0
 datafold_dir=cross_eval/"$organ"_aug_data_fold/

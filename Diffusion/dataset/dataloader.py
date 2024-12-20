@@ -169,8 +169,6 @@ class LoadImageh5d(MapTransform):
                 if meta_key in d and not self.overwriting:
                     raise KeyError(f"Metadata with key {meta_key} already exists and overwriting=False.")
                 d[meta_key] = data[1]
-        # 添加调试信息
-        print(f"LoadImageh5d - {key} shape: {d[key].shape}")
         return d
 
 
@@ -239,7 +237,6 @@ def get_loader(args):
         def _check_shapes(data):
             image = data['image']
             label = data['label']
-            print(f"{stage} - Image shape: {image.shape}, Label shape: {label.shape}")
             return data
         return _check_shapes
 
@@ -333,14 +330,13 @@ def get_loader(args):
 
         with open(file_path) as f:
             for line in f:
-                parts = line.strip().split(maxsplit=2)  # 前两个部分是image和label
+                parts = line.strip().split(maxsplit=2)  
                 name = parts[1].split('.')[0]
                 img_list.append(root_path + parts[0])
                 lbl_list.append(label_root_path + parts[1])
 
-                # 使用10个空格作为分隔符来分割文本描述
-                text_descriptions = parts[2].split(' ' * 10)  # 这里按照10个空格进行分割
-                text_descriptions = [desc.strip() for desc in text_descriptions if desc.strip()]  # 去除每个描述前后的空白并移除空的项
+                text_descriptions = parts[2].split(' ' * 10)  
+                text_descriptions = [desc.strip() for desc in text_descriptions if desc.strip()] 
 
                 text_list.append(text_descriptions)
                 name_list.append(name)
