@@ -41,7 +41,7 @@ See [installation](utils/INSTALL.md) to obtain requirements and download dataset
 ## STEP 1. 🚀 Train Diffusion Model
 ### 📥 Download Required Files
 We offer the pre-trained checkpoint of the **Autoencoder Model**, which was trained on the **AbdomenAtlas 1.1 dataset** (see details in [SuPreM](https://github.com/MrGiovanni/SuPreM)).  
-This checkpoint can be directly used for the Diffusion model if you do not want to re-train the Autoencoder Model. Simply download it to `Diffusion/pretrained_models/AutoencoderModel.ckpt` by running the following command:
+This checkpoint can be directly used for the Diffusion model if you do not want to re-train the Autoencoder Model. Simply download it to `Diffusion/pretrained_models/` by running the following command:
 
 ```bash
 cd Diffusion/pretrained_models
