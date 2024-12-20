@@ -52,7 +52,7 @@ cat healthy_ct.zip* > HealthyCT.zip
 rm -rf healthy_ct.zip* cache
 unzip -o -q HealthyCT.zip -d /HealthyCT
 ```
-### 🛠️ Using the Singularity Container for TextoMorph
+## 🛠️ Using the Singularity Container for TextoMorph
 
 We provide a **Singularity container** for running **TextoMorph** tasks, which supports both text-driven tumor synthesis and segmentation (organ, tumor). Follow the instructions below to get started.
 
