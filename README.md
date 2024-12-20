@@ -7,19 +7,20 @@ Current tumor synthesis methods lack precise control over specific characteristi
 ## Paper
 
 <b>Text-Driven Tumor Synthesis</b> <br/>
-[Xinran Li](https://scholar.google.com/citations?hl=zh-CN&user=awRZX_gAAAAJ)<sup>1,2</sup>, [Yi Shuai](https://openreview.net/profile?id=~Yi_Shuai1)<sup>3</sup>, [Chen Liu](https://scholar.google.com/citations?user=i938yiEAAAAJ&hl=zh-CN)<sup>1,4</sup>, [Qi Chen](https://scholar.google.com/citations?user=4Q5gs2MAAAAJ&hl=en)<sup>1,5</sup>, [Qilong Wu](https://github.com/JerryWu-code)<sup>1,6</sup>, [Pengfei Guo](https://scholar.google.co.uk/citations?hl=en&pli=1&user=_IAp-bYAAAAJ)<sup>7</sup>, [Dong Yang](https://scholar.google.com/citations?user=PHvliUgAAAAJ&hl=en&oi=sra)<sup>7</sup>,  
-[Can Zhao](https://scholar.google.com/citations?user=CdzhxtYAAAAJ&hl=en)<sup>7</sup>, [Pedro R. A. S. Bassi](https://scholar.google.com/citations?hl=zh-CN&user=NftgL6gAAAAJ)<sup>1,8,9</sup>, [Daguang Xu](https://research.nvidia.com/person/daguang-xu)<sup>7</sup>, [Kang Wang](https://radiology.ucsf.edu/people/kang-wang)<sup>10</sup>, [Yang Yang](https://scholar.google.com/citations?user=6XsJUBIAAAAJ&hl=zh-CN)<sup>10</sup>, [Alan Yuille](https://www.cs.jhu.edu/~ayuille/)<sup>1</sup>, [Zongwei Zhou](https://www.zongweiz.com/)<sup>1,*</sup>  
+[Xinran Li](https://scholar.google.com/citations?hl=zh-CN&user=awRZX_gAAAAJ)<sup>1,2</sup>, [Yi Shuai](https://openreview.net/profile?id=~Yi_Shuai1)<sup>3,4</sup>, [Chen Liu](https://scholar.google.com/citations?user=i938yiEAAAAJ&hl=zh-CN)<sup>1,5</sup>, [Qi Chen](https://scholar.google.com/citations?user=4Q5gs2MAAAAJ&hl=en)<sup>1,6</sup>, [Qilong Wu](https://github.com/JerryWu-code)<sup>1,7</sup>, [Pengfei Guo](https://scholar.google.co.uk/citations?hl=en&pli=1&user=_IAp-bYAAAAJ)<sup>8</sup>, [Dong Yang](https://scholar.google.com/citations?user=PHvliUgAAAAJ&hl=en&oi=sra)<sup>8</sup>,  
+[Can Zhao](https://scholar.google.com/citations?user=CdzhxtYAAAAJ&hl=en)<sup>8</sup>, [Pedro R. A. S. Bassi](https://scholar.google.com/citations?hl=zh-CN&user=NftgL6gAAAAJ)<sup>1,9,10</sup>, [Daguang Xu](https://research.nvidia.com/person/daguang-xu)<sup>8</sup>, [Kang Wang](https://radiology.ucsf.edu/people/kang-wang)<sup>11</sup>, [Yang Yang](https://scholar.google.com/citations?user=6XsJUBIAAAAJ&hl=zh-CN)<sup>11</sup>, [Alan Yuille](https://www.cs.jhu.edu/~ayuille/)<sup>1</sup>, [Zongwei Zhou](https://www.zongweiz.com/)<sup>1,*</sup>  
 
 <sup>1</sup> Johns Hopkins University  
-<sup>2</sup> Shenzhen Technology University  
-<sup>3</sup> Sun Yat-sen University  
-<sup>4</sup> Hong Kong Polytechnic University  
-<sup>5</sup> University of Chinese Academy of Sciences  
-<sup>6</sup> National University of Singapore  
-<sup>7</sup> NVIDIA  
-<sup>8</sup> University of Bologna  
-<sup>9</sup> Italian Institute of Technology  
-<sup>10</sup> University of California, San Francisco  
+<sup>2</sup> Shenzhen Technology University 
+<sup>3</sup>The First Affiliated Hospital of Sun Yat-sen University 
+<sup>4</sup> Sun Yat-sen University  
+<sup>5</sup> Hong Kong Polytechnic University  
+<sup>6</sup> University of Chinese Academy of Sciences  
+<sup>7</sup> National University of Singapore  
+<sup>8</sup> NVIDIA  
+<sup>9</sup> University of Bologna  
+<sup>10</sup> Italian Institute of Technology  
+<sup>11</sup> University of California, San Francisco  
 
 
 
