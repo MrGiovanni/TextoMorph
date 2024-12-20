@@ -737,18 +737,18 @@ class GaussianDiffusion(nn.Module):
         self.use_dynamic_thres = use_dynamic_thres
         self.dynamic_thres_percentile = dynamic_thres_percentile
     def get_another_report(self, text):
-        file_path='/ccvl/net/ccvl15/xinran/ReportTumor/STEP2.DiffusionModel/cross_eval/kits_tumor_data_early_fold/real_tumor_train_0.txt'
-        def extract_text_list(line):
-            reports = line.split("          ")
-            return reports[2] if len(reports) > 2 else ""
+        file_path='/con_report/report.txt'
+        # def extract_text_list(line):
+        #     reports = line.split("          ")
+        #     return reports[2] if len(reports) > 2 else ""
 
         def process_file(file_path):
             text_lists = []
             with open(file_path, 'r') as file:
                 lines = file.readlines()
                 for line in lines:
-                    cleaned_line = line.strip().replace("\n", "").replace("\r", "")
-                    report = extract_text_list(cleaned_line)
+                    report = line.strip().replace("\n", "").replace("\r", "")
+                    # report = extract_text_list(cleaned_line)
                     text_lists.append(report)
             return text_lists
 
