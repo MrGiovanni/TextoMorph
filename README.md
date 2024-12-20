@@ -11,8 +11,8 @@ Current tumor synthesis methods lack precise control over specific characteristi
 [Can Zhao](https://scholar.google.com/citations?user=CdzhxtYAAAAJ&hl=en)<sup>8</sup>, [Pedro R. A. S. Bassi](https://scholar.google.com/citations?hl=zh-CN&user=NftgL6gAAAAJ)<sup>1,9,10</sup>, [Daguang Xu](https://research.nvidia.com/person/daguang-xu)<sup>8</sup>, [Kang Wang](https://radiology.ucsf.edu/people/kang-wang)<sup>11</sup>, [Yang Yang](https://scholar.google.com/citations?user=6XsJUBIAAAAJ&hl=zh-CN)<sup>11</sup>, [Alan Yuille](https://www.cs.jhu.edu/~ayuille/)<sup>1</sup>, [Zongwei Zhou](https://www.zongweiz.com/)<sup>1,*</sup>  
 
 <sup>1</sup> Johns Hopkins University  
-<sup>2</sup> Shenzhen Technology University 
-<sup>3</sup>The First Affiliated Hospital of Sun Yat-sen University 
+<sup>2</sup> Shenzhen Technology University  
+<sup>3</sup>The First Affiliated Hospital of Sun Yat-sen University   
 <sup>4</sup> Sun Yat-sen University  
 <sup>5</sup> Hong Kong Polytechnic University  
 <sup>6</sup> University of Chinese Academy of Sciences  
