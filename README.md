@@ -12,7 +12,7 @@ Current tumor synthesis methods lack precise control over specific characteristi
 
 <sup>1</sup> Johns Hopkins University  
 <sup>2</sup> Shenzhen Technology University  
-<sup>3</sup>The First Affiliated Hospital of Sun Yat-sen University   
+<sup>3</sup> The First Affiliated Hospital of Sun Yat-sen University   
 <sup>4</sup> Sun Yat-sen University  
 <sup>5</sup> Hong Kong Polytechnic University  
 <sup>6</sup> University of Chinese Academy of Sciences  
