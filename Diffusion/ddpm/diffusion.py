@@ -737,10 +737,8 @@ class GaussianDiffusion(nn.Module):
         self.use_dynamic_thres = use_dynamic_thres
         self.dynamic_thres_percentile = dynamic_thres_percentile
     def get_another_report(self, text):
-        file_path='/con_report/report.txt'
-        # def extract_text_list(line):
-        #     reports = line.split("          ")
-        #     return reports[2] if len(reports) > 2 else ""
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(current_dir, "con_report/report.txt")
 
         def process_file(file_path):
             text_lists = []
@@ -748,7 +746,6 @@ class GaussianDiffusion(nn.Module):
                 lines = file.readlines()
                 for line in lines:
                     report = line.strip().replace("\n", "").replace("\r", "")
-                    # report = extract_text_list(cleaned_line)
                     text_lists.append(report)
             return text_lists
 
