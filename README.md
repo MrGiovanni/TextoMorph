@@ -22,7 +22,7 @@ Current tumor synthesis methods lack precise control over specific characteristi
 <sup>10</sup> Italian Institute of Technology  
 <sup>11</sup> University of California, San Francisco  
 
-
+<a href='https://arxiv.org/pdf/2412.18589'><img src='https://img.shields.io/badge/Paper-PDF-purple'></a>
 
 **We have documented common questions for the paper in [Frequently Asked Questions (FAQ)](documents/FAQ.md).**
 
