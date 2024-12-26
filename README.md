@@ -12,14 +12,13 @@ Current tumor synthesis methods lack precise control over specific characteristi
 <sup>2</sup> Shenzhen Technology University  <sup>3</sup> The First Affiliated Hospital of Sun Yat-sen University   
 <sup>4</sup> Sun Yat-sen University  <sup>5</sup> Hong Kong Polytechnic University  
 <sup>6</sup> University of Chinese Academy of Sciences  <sup>7</sup> National University of Singapore  
-<sup>8</sup> NVIDIA  <sup>9</sup> University of Bologna  <sup>10</sup> Italian Institute of Technology  <sup>11</sup> University of California, San Francisco <br/>  
+<sup>8</sup> NVIDIA  <sup>9</sup> University of Bologna  <sup>10</sup> Italian Institute of Technology  <sup>11</sup> University of California, San Francisco <br/>
 <a href='https://arxiv.org/pdf/2412.18589'><img src='https://img.shields.io/badge/Paper-PDF-purple'></a>
 
 **We collect paper related to medical data synthesis in [Awesome Synthetic Tumors](https://github.com/MrGiovanni/SyntheticTumors/blob/main/AWESOME.md) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)**
 
 
-## 📥 Installation
-Begin by cloning the project repository to your local machine using the following command:
+## 0. Installation
 
 ```bash
 git clone https://github.com/MrGiovanni/TextoMorph.git
@@ -28,8 +27,9 @@ cd TextoMorph
 See [installation](utils/INSTALL.md) to obtain requirements and download dataset.
 
 
-## STEP 1. 🚀 Train Diffusion Model
-### 📥 Download Required Files
+## 1. Train Diffusion Model
+
+#### 📥 Download Required Files
 We offer the pre-trained checkpoint of the **Autoencoder Model**, which was trained on the **AbdomenAtlas 1.1 dataset** (see details in [SuPreM](https://github.com/MrGiovanni/SuPreM)).  
 This checkpoint can be directly used for the Diffusion model if you do not want to re-train the Autoencoder Model. Simply download it to `Diffusion/pretrained_models/` by running the following command:
 
@@ -38,7 +38,7 @@ cd Diffusion/pretrained_models
 wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/AutoencoderModel.ckpt
 cd ../..
 ```
-### 💡 How to Train Your Own Model
+#### 💡 How to Train Your Own Model
 
 Due to licensing constraints, we are unable to provide the training CT datasets. However, to assist in training your own model, we have made the **descriptive words** used during training available in the following files:
 
@@ -51,7 +51,7 @@ If you wish to train your own model, you can rewrite these `real_tumor.txt` file
 ```plaintext
 CT_id  Label_id  t1  t2  ...  t100
 ```
-### 🔧 Start Training
+#### 🔧 Start Training
 ```bash
 cd Diffusion/
 vqgan_ckpt="pretrained_models/AutoencoderModel.ckpt" # your-datapath
@@ -62,7 +62,7 @@ python train.py dataset.name=liver_tumor dataset.data_root_path=$datapath datase
 
 We offer the pre-trained checkpoints of Diffusion Model for liver, pancreas and kidney, respectively. This checkpoint can be directly used for segmentation if you do not want to re-train the Diffusion Model. Simply download it to `Segmentation/TumorGeneration/model_weight`
 
-### 🔗 Checkpoints Overview
+#### 🔗 Checkpoints Overview
 
 The following checkpoints are available for download. These pre-trained weights can be used directly for tumor generation and segmentation tasks for different organs:
 
@@ -72,12 +72,12 @@ The following checkpoints are available for download. These pre-trained weights 
 | **Pancreas** | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descriptivetumor2/pancreas.pt) |
 | **Kidney**   | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descriptivetumor2/kidney.pt?download=true) |
 
-## STEP 2. 🚀 Train Segmentation Model
+## 2. Train Segmentation Model
 
 To use the **TumorGeneration** segmentation model, download the necessary pre-trained weights.  
 Follow the instructions below to ensure the proper setup of your directory structure and model files.
 
-### 📥 Download Required Files
+#### 📥 Download Required Files
 
 Run the following commands to download the pre-trained weights:
 
@@ -92,7 +92,7 @@ wget https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descripti
 
 cd ../..
 ```
-### 🔧 Start Training
+#### 🔧 Start Training
 ```bash
 cd Segmentation
 
@@ -110,7 +110,7 @@ datafold_dir=cross_eval/"$organ"_aug_data_fold/
 dist=$((RANDOM % 99999 + 10000))
 python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir $datafold_dir
 ```
-### 🔗 Checkpoint Overview
+#### 🔗 Checkpoint Overview
 
 | **Model**           | **Download**                                                                                 |
 |----------------------|---------------------------------------------------------------------------------------------------|
@@ -118,7 +118,7 @@ python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-
 | **Pancreas**   | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/pancreas.pt) |
 | **Kidney**     | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/kidney.pt) |
 
-## STEP 3. 🚀 Evaluation
+## 3. Evaluation
 
 
 ```bash
