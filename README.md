@@ -8,25 +8,15 @@ Current tumor synthesis methods lack precise control over specific characteristi
 
 <b>Text-Driven Tumor Synthesis</b> <br/>
 [Xinran Li](https://scholar.google.com/citations?hl=zh-CN&user=awRZX_gAAAAJ)<sup>1,2</sup>, [Yi Shuai](https://openreview.net/profile?id=~Yi_Shuai1)<sup>3,4</sup>, [Chen Liu](https://scholar.google.com/citations?user=i938yiEAAAAJ&hl=zh-CN)<sup>1,5</sup>, [Qi Chen](https://scholar.google.com/citations?user=4Q5gs2MAAAAJ&hl=en)<sup>1,6</sup>, [Qilong Wu](https://github.com/JerryWu-code)<sup>1,7</sup>, [Pengfei Guo](https://scholar.google.co.uk/citations?hl=en&pli=1&user=_IAp-bYAAAAJ)<sup>8</sup>, [Dong Yang](https://scholar.google.com/citations?user=PHvliUgAAAAJ&hl=en&oi=sra)<sup>8</sup>,  
-[Can Zhao](https://scholar.google.com/citations?user=CdzhxtYAAAAJ&hl=en)<sup>8</sup>, [Pedro R. A. S. Bassi](https://scholar.google.com/citations?hl=zh-CN&user=NftgL6gAAAAJ)<sup>1,9,10</sup>, [Daguang Xu](https://research.nvidia.com/person/daguang-xu)<sup>8</sup>, [Kang Wang](https://radiology.ucsf.edu/people/kang-wang)<sup>11</sup>, [Yang Yang](https://scholar.google.com/citations?user=6XsJUBIAAAAJ&hl=zh-CN)<sup>11</sup>, [Alan Yuille](https://www.cs.jhu.edu/~ayuille/)<sup>1</sup>, [Zongwei Zhou](https://www.zongweiz.com/)<sup>1,*</sup>  
-
+[Can Zhao](https://scholar.google.com/citations?user=CdzhxtYAAAAJ&hl=en)<sup>8</sup>, [Pedro R. A. S. Bassi](https://scholar.google.com/citations?hl=zh-CN&user=NftgL6gAAAAJ)<sup>1,9,10</sup>, [Daguang Xu](https://research.nvidia.com/person/daguang-xu)<sup>8</sup>, [Kang Wang](https://radiology.ucsf.edu/people/kang-wang)<sup>11</sup>, [Yang Yang](https://scholar.google.com/citations?user=6XsJUBIAAAAJ&hl=zh-CN)<sup>11</sup>, [Alan Yuille](https://www.cs.jhu.edu/~ayuille/)<sup>1</sup>, [Zongwei Zhou](https://www.zongweiz.com/)<sup>1,*</sup> <br/>
 <sup>1</sup> Johns Hopkins University  
-<sup>2</sup> Shenzhen Technology University  
-<sup>3</sup> The First Affiliated Hospital of Sun Yat-sen University   
-<sup>4</sup> Sun Yat-sen University  
-<sup>5</sup> Hong Kong Polytechnic University  
-<sup>6</sup> University of Chinese Academy of Sciences  
-<sup>7</sup> National University of Singapore  
-<sup>8</sup> NVIDIA  
-<sup>9</sup> University of Bologna  
-<sup>10</sup> Italian Institute of Technology  
-<sup>11</sup> University of California, San Francisco  
-
+<sup>2</sup> Shenzhen Technology University  <sup>3</sup> The First Affiliated Hospital of Sun Yat-sen University   
+<sup>4</sup> Sun Yat-sen University  <sup>5</sup> Hong Kong Polytechnic University  
+<sup>6</sup> University of Chinese Academy of Sciences  <sup>7</sup> National University of Singapore  
+<sup>8</sup> NVIDIA  <sup>9</sup> University of Bologna  <sup>10</sup> Italian Institute of Technology  <sup>11</sup> University of California, San Francisco <br/>  
 <a href='https://arxiv.org/pdf/2412.18589'><img src='https://img.shields.io/badge/Paper-PDF-purple'></a>
 
-**We have documented common questions for the paper in [Frequently Asked Questions (FAQ)](documents/FAQ.md).**
-
-**We have summarized publications related to tumor synthesis in [Awesome Synthetic Tumors](https://github.com/MrGiovanni/SyntheticTumors/blob/main/AWESOME.md) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re).**
+**We have summarized publications related to medical data synthesis in [Awesome Synthetic Tumors](https://github.com/MrGiovanni/SyntheticTumors/blob/main/AWESOME.md) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)**
 
 
 ## 📥 Installation
@@ -62,7 +52,7 @@ If you wish to train your own model, you can rewrite these `real_tumor.txt` file
 ```plaintext
 CT_id  Label_id  t1  t2  ...  t100
 ```
-### 🔧 Start training.
+### 🔧 Start Training
 ```bash
 cd Diffusion/
 vqgan_ckpt="pretrained_models/AutoencoderModel.ckpt" # your-datapath
@@ -83,7 +73,7 @@ The following checkpoints are available for download. These pre-trained weights 
 | **Pancreas** | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descriptivetumor2/pancreas.pt) |
 | **Kidney**   | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descriptivetumor2/kidney.pt?download=true) |
 
-## STEP 2. 🚀 Train Segmentation model
+## STEP 2. 🚀 Train Segmentation Model
 
 To use the **TumorGeneration** segmentation model, download the necessary pre-trained weights.  
 Follow the instructions below to ensure the proper setup of your directory structure and model files.
@@ -103,7 +93,7 @@ wget https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descripti
 
 cd ../..
 ```
-### 🔧 Start training.
+### 🔧 Start Training
 ```bash
 cd Segmentation
 
@@ -139,6 +129,35 @@ organ=liver
 fold=0
 datafold_dir=cross_eval/"$organ"_aug_data_fold/
 python -W ignore validation.py --model=unet --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
+```
+
+## Citation
+
+```
+@misc{li2024text,
+  title={Text-Driven Tumor Synthesis}, 
+  author={Xinran Li and Yi Shuai and Chen Liu and Qi Chen and Qilong Wu and Pengfei Guo and Dong Yang and Can Zhao and Pedro R. A. S. Bassi and Daguang Xu and Kang Wang and Yang Yang and Alan Yuille and Zongwei Zhou},
+  year={2024},
+  eprint={2412.18589},
+  archivePrefix={arXiv},
+  primaryClass={eess.IV},
+  url={https://github.com/MrGiovanni/TextoMorph}, 
+}
+
+@article{chen2024analyzing,
+  title={Analyzing Tumors by Synthesis},
+  author={Chen, Qi and Lai, Yuxiang and Chen, Xiaoxi and Hu, Qixin and Yuille, Alan and Zhou, Zongwei},
+  journal={arXiv preprint arXiv:2409.06035},
+  year={2024}
+}
+
+@inproceedings{chen2024towards,
+  title={Towards Generalizable Tumor Synthesis},
+  author={Chen, Qi and Chen, Xiaoxi and Song, Haorui and Xiong, Zhiwei and Yuille, Alan and Wei, Chen and Zhou, Zongwei},
+  booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year={2024},
+  url={https://github.com/MrGiovanni/DiffTumor}
+}
 ```
 
 ## Acknowledgments
