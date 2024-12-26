@@ -16,7 +16,7 @@ Current tumor synthesis methods lack precise control over specific characteristi
 <sup>8</sup> NVIDIA  <sup>9</sup> University of Bologna  <sup>10</sup> Italian Institute of Technology  <sup>11</sup> University of California, San Francisco <br/>  
 <a href='https://arxiv.org/pdf/2412.18589'><img src='https://img.shields.io/badge/Paper-PDF-purple'></a>
 
-**We have summarized publications related to medical data synthesis in [Awesome Synthetic Tumors](https://github.com/MrGiovanni/SyntheticTumors/blob/main/AWESOME.md) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)**
+**We collect paper related to medical data synthesis in [Awesome Synthetic Tumors](https://github.com/MrGiovanni/SyntheticTumors/blob/main/AWESOME.md) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)**
 
 
 ## 📥 Installation
