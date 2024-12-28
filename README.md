@@ -133,14 +133,12 @@ python -W ignore validation.py --model=unet --data_root $datapath --datafold_dir
 ## Citation
 
 ```
-@misc{li2024text,
-  title={Text-Driven Tumor Synthesis}, 
-  author={Xinran Li and Yi Shuai and Chen Liu and Qi Chen and Qilong Wu and Pengfei Guo and Dong Yang and Can Zhao and Pedro R. A. S. Bassi and Daguang Xu and Kang Wang and Yang Yang and Alan Yuille and Zongwei Zhou},
+@article{li2024text,
+  title={Text-Driven Tumor Synthesis},
+  author={Li, Xinran and Shuai, Yi and Liu, Chen and Chen, Qi and Wu, Qilong and Guo, Pengfei and Yang, Dong and Zhao, Can and Bassi, Pedro RAS and Xu, Daguang and others},
+  journal={arXiv preprint arXiv:2412.18589},
   year={2024},
-  eprint={2412.18589},
-  archivePrefix={arXiv},
-  primaryClass={eess.IV},
-  url={https://github.com/MrGiovanni/TextoMorph}, 
+  url={https://github.com/MrGiovanni/TextoMorph}
 }
 
 @article{chen2024analyzing,
