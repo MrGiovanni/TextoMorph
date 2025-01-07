@@ -60,7 +60,7 @@ tumorlabel="/ccvl/net/ccvl15/xinran/Tumor/liver/" # your-datapath
 python train.py dataset.name=liver_tumor dataset.data_root_path=$datapath dataset.label_root_path=$tumorlabel dataset.dataset_list=['liver'] dataset.uniform_sample=False model.results_folder_postfix="liver"  model.vqgan_ckpt=$vqgan_ckpt
 ```
 
-We offer the pre-trained checkpoints of Diffusion Model for liver, pancreas and kidney, respectively. This checkpoint can be directly used for segmentation if you do not want to re-train the Diffusion Model. Simply download it to `Segmentation/TumorGeneration/model_weight`
+We provide pre-trained checkpoints of the Diffusion Model for liver, pancreas, and kidney, respectively. These checkpoints can be directly utilized for segmentation tasks without the need to re-train the Diffusion Model. To use them, simply download the required checkpoints to the `Segmentation/TumorGeneration/model_weight` directory.
 
 #### 🔗 Checkpoints Overview
 
@@ -74,7 +74,7 @@ The following checkpoints are available for download. These pre-trained weights 
 
 ## 2. Train Segmentation Model
 
-To use the **TumorGeneration** segmentation model, download the necessary pre-trained weights.  
+To train the segmentation model, please ensure the required pre-trained weights are downloaded.
 Follow the instructions below to ensure the proper setup of your directory structure and model files.
 
 #### 📥 Download Required Files
@@ -112,11 +112,21 @@ python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-
 ```
 #### 🔗 Checkpoint Overview
 
-| **Model**           | **Download**                                                                                 |
-|----------------------|---------------------------------------------------------------------------------------------------|
-| **Liver**     | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/liver.pt) |
-| **Pancreas**   | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/pancreas.pt) |
-| **Kidney**     | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/kidney.pt) |
+
+| **Method**       | **Text E-G** | **Contrastive Loss** | **T-D-A** | **Liver** | **Pancreas** | **Kidney** |
+|-------------------|--------------|-----------------------|-----------|-----------|--------------|------------|
+| RealTumor         | -            | -                     | -         | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/realtumor/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/realtumor/pancreas.pt)       | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/realtumor/kidney.pt)     |
+| [SynTumor](https://arxiv.org/pdf/2303.14869)     | -            | -                     | -         | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/syntumor/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/syntumor/pancreas.pt)       | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/syntumor/kidney.pt)     |
+| [Pixel2Cancer](https://www.cs.jhu.edu/~alanlab/Pubs24/lai2024pixel.pdf) | -            | -                     | -         | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/pixel2cance/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/pixel2cance/pancreas.pt)       | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/pixel2cance/kidney.pt)     |
+| [DiffTumor](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf)    | -            | -                     | -         |[Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/difftumor/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/difftumor/pancreas.pt)       | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/difftumor/kidney.pt)    |
+| TextoMorph        | -            | -                     | -         | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation1/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation1/pancreas.pt)        |  [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation1/kidney.pt)     |
+| TextoMorph        | ✓            |        -              | -         | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation2/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation2/pancreas.pt)        |  [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation2/kidney.pt)     |
+| TextoMorph        | ✓            | ✓                     |   -       | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation3/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation3/pancreas.pt)        |  [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation3/kidney.pt)     |
+| TextoMorph        | ✓            | ✓                     | ✓         | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/pancreas.pt)        |  [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/kidney.pt)     |
+#### 💡Note
+- **Text E-G**: Text Extraction and Generation.
+- **Contrastive Loss**: Text-Driven Contrastive Learning.
+- **T-D-A**: Targeted Data Augmentation.
 
 ## 3. Evaluation
 
