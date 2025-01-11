@@ -1,7 +1,20 @@
 # Text-Driven Tumor Synthesis
+
+<h1 align="center">CLIP-Driven Universal Model</h1>
+
 <div align="center">
-  <img src="/utils/fig_cloudplot.png" alt="fig_cloudplot"/>
+
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=MrGiovanni/TextoMorph)
+[![GitHub Repo stars](https://img.shields.io/github/stars/MrGiovanni/TextoMorph?style=social)](https://github.com/MrGiovanni/TextoMorph/stargazers)
+<a href="https://twitter.com/bodymaps317">
+        <img src="https://img.shields.io/twitter/follow/BodyMaps?style=social" alt="Follow on Twitter" />
+</a><br/>
+**Subscribe us: https://groups.google.com/u/2/g/bodymaps**  
+
 </div>
+
+<p align="center"><img width="100%" src="utils/fig_cloudplot.png" /></p>
+
 Current tumor synthesis methods lack precise control over specific characteristics, resulting in similar or duplicate examples that fail to effectively enhance AI performance. We introduce TextoMorph, a novel text-driven approach that allows detailed textual control over tumor features such as texture, heterogeneity, boundaries, and pathology type to improve AI training.
 
 ## Paper
