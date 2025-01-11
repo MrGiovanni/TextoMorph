@@ -1,6 +1,4 @@
-# Text-Driven Tumor Synthesis
-
-<h1 align="center">CLIP-Driven Universal Model</h1>
+<h1 align="center">TextoMorph</h1>
 
 <div align="center">
 
