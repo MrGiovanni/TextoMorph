@@ -122,7 +122,7 @@ dist=$((RANDOM % 99999 + 10000))
 python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir $datafold_dir
 ```
 #### 🔗 Checkpoint Overview
-[All checkpoints](https://huggingface.co/Alena-Xinran/DescriptiveTumor/checkpoints.zip)
+[All checkpoints](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/checkpoints.zip?download=true)
 <details>
 <summary>Liver Tumors</summary>
 
