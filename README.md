@@ -122,19 +122,61 @@ dist=$((RANDOM % 99999 + 10000))
 python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir $datafold_dir
 ```
 #### 🔗 Checkpoint Overview
+[All checkpoints](https://huggingface.co/Alena-Xinran/DescriptiveTumor/checkpoints.zip)
+<details>
+<summary>Liver Tumors</summary>
+
+| **Method**       | **Tumor Size (mm) d < 20** | **20 ≤ d < 50** | **d ≥ 50** | **DSC (%)**    | **NSD (%)**    |
+|------------------|--------------------------|------------------------|-------------------|----------------|----------------|
+| RealTumor <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/real/liver.pt))        | 64.5 (20/31)            | 69.7 (53/76)          | 66.7 (38/57)      | 59.1 ± 30.4    | 60.1 ± 30.0    |
+| SynTumor <br /> ([paper](https://arxiv.org/pdf/2303.14869), [checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/syntumor/liver.pt))         | 71.0 (22/31)            | 69.7 (53/76)          | 73.7 (42/57)      | 62.3 ± 12.7    | 87.7 ± 21.4    |
+| Pixel2Cancer <br /> ([paper](https://www.cs.jhu.edu/~alanlab/Pubs24/lai2024pixel.pdf), [checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/pixel2cance/liver.pt))     | -                        | -                      | -                 | 57.2 ± 21.3    | 63.1 ± 15.6    |
+| DiffTumor <br /> ([paper](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf), [checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/difftumor/liver.pt))        | 77.4 (24/31)            | 75.0 (57/76)          | 73.7 (42/57)      | 64.2 ± 33.3    | 66.1 ± 32.8    |
+| TextoMorph (1) <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation1/liver.pt))  | 75.4 (23/31)            | 72.4 (55/76)          | 74.6 (43/57)      | 65.5 ± 25.0    | 61.3 ± 28.6    |
+| TextoMorph (2) <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation2/liver.pt))  | 77.4 (24/31)            | 75.0 (57/76)          | 77.2 (44/57)      | 68.4 ± 30.4    | 69.2 ± 31.0    |
+| TextoMorph (3) <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation3/liver.pt))  | 80.6 (25/31)            | 77.6 (59/76)          | 80.7 (46/57)      | 69.7 ± 27.2    | 70.8 ± 26.0    |
+| TextoMorph (4) <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/liver.pt))  | 83.9 (26/31)            | 77.6 (59/76)          | 87.7 (50/57)      | 71.6 ± 27.2    | 72.4 ± 30.3    |
+
+</details>
+
+<details>
+<summary>Pancreas Tumors</summary>
+
+| **Method**       | **Tumor Size (mm) d < 20** | **20 ≤ d < 50** | **d ≥ 50** | **DSC (%)**    | **NSD (%)**    |
+|------------------|--------------------------|------------------------|-------------------|----------------|----------------|
+| RealTumor   <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/real/pancreas.pt))      | 58.3 (14/24)            | 67.7 (21/31)          | 57.1 (4/7)        | 53.3 ± 28.7    | 40.1 ± 28.8    |
+| SynTumor    <br /> ([paper](https://arxiv.org/pdf/2303.14869), [checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/syntumor/pancreas.pt))       | 62.5 (15/24)            | 64.5 (20/31)          | 57.1 (4/7)        | 54.0 ± 31.4    | 47.2 ± 23.0    |
+| Pixel2Cancer   <br /> ([paper](https://www.cs.jhu.edu/~alanlab/Pubs24/lai2024pixel.pdf), [checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/pixel2cance/pancreas.pt))     | -                        | -                      | -                 | 57.9 ± 13.7    | 54.3 ± 19.2    |
+| DiffTumor   <br /> ([paper](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf), [checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/difftumor/pancreas.pt))         | 66.7 (16/24)            | 67.7 (21/31)          | 57.1 (4/7)        | 58.9 ± 42.8    | 52.8 ± 26.2    |
+| TextoMorph (1) <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation1/pancreas.pt))   | 66.7 (16/24)            | 64.5 (20/31)          | 57.1 (4/7)        | 55.8 ± 32.6    | 51.1 ± 35.6    |
+| TextoMorph (2) <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation2/pancreas.pt))  | 70.8 (17/24)            | 61.3 (19/31)          | 57.1 (4/7)        | 59.7 ± 36.1    | 60.6 ± 38.3    |
+| TextoMorph (3) <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation3/pancreas.pt))  | 64.0 (16/24)            | 70.0 (21/31)          | 57.1 (4/7)        | 60.2 ± 27.3    | 71.0 ± 31.5    |
+| TextoMorph (4) <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/pancreas.pt))  | 87.5 (21/24)            | 87.1 (27/31)          | 85.7 (6/7)        | 67.3 ± 24.8    | 65.5 ± 27.1    |
+</details>
 
 
-| **Method**       | **Text E-G** | **Contrastive Loss** | **T-D-A** | **Liver** | **Pancreas** | **Kidney** |
-|-------------------|--------------|-----------------------|-----------|-----------|--------------|------------|
-| RealTumor         | -            | -                     | -         | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/realtumor/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/realtumor/pancreas.pt)       | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/realtumor/kidney.pt)     |
-| [SynTumor](https://arxiv.org/pdf/2303.14869)     | -            | -                     | -         | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/syntumor/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/syntumor/pancreas.pt)       | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/syntumor/kidney.pt)     |
-| [Pixel2Cancer](https://www.cs.jhu.edu/~alanlab/Pubs24/lai2024pixel.pdf) | -            | -                     | -         | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/pixel2cance/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/pixel2cance/pancreas.pt)       | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/pixel2cance/kidney.pt)     |
-| [DiffTumor](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf)    | -            | -                     | -         |[Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/difftumor/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/difftumor/pancreas.pt)       | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/difftumor/kidney.pt)    |
-| TextoMorph        | ✓            | ✓                     | ✓         | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/liver.pt)    | [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/pancreas.pt)        |  [Download](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/kidney.pt)     |
-#### 💡Note
-- **Text E-G**: Text Extraction and Generation.
-- **Contrastive Loss**: Text-Driven Contrastive Learning.
-- **T-D-A**: Targeted Data Augmentation.
+<details>
+<summary>Kidney Tumors</summary>
+      
+| **Method**       | **Tumor Size (mm) d < 20** | **20 ≤ d < 50** | **d ≥ 50** | **DSC (%)**    | **NSD (%)**    |
+|------------------|--------------------------|------------------------|-------------------|----------------|----------------|
+| RealTumor <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/real/kidney.pt))        | 71.4 (5/7)             | 66.7 (4/6)           | 69.0 (29/42)      | 78.0 ± 14.9    | 65.8 ± 17.7    |
+| SynTumor  <br /> ([paper](https://arxiv.org/pdf/2303.14869), [checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/syntumor/kidney.pt))        | 71.4 (5/7)             | 66.7 (4/6)           | 69.0 (29/42)      | 78.1 ± 23.0    | 66.0 ± 21.2    |
+| Pixel2Cancer <br /> ([paper](https://www.cs.jhu.edu/~alanlab/Pubs24/lai2024pixel.pdf), [checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/pixel2cance/kidney.pt))    | -                        | -                      | -                 | 71.5 ± 21.4    | 64.3 ± 16.9    |
+| DiffTumor <br /> ([paper](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf), [checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/baseline/difftumor/kidney.pt))       | 71.4 (5/7)             | 83.3 (5/6)           | 69.0 (29/42)      | 78.9 ± 19.7    | 69.2 ± 18.5    |
+| TextoMorph (1) <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation1/kidney.pt))  | 57.1 (4/7)             | 83.3 (5/6)           | 69.0 (29/42)      | 79.2 ± 22.3    | 71.4 ± 21.4    |
+| TextoMorph (2) <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation2/kidney.pt))  | 71.4 (5/7)             | 83.3 (5/6)           | 76.2 (32/42)      | 80.6 ± 21.8    | 76.8 ± 19.3    |
+| TextoMorph (3) <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation3/kidney.pt))  | 71.4 (5/7)             | 83.3 (5/6)           | 73.8 (31/42)      | 79.7 ± 20.2    | 75.2 ± 21.5    |
+| TextoMorph (4) <br /> ([checkpoint](https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/segmentation/kidney.pt))  | 71.4 (5/7)             | 83.3 (5/6)           | 76.2 (32/42)      | 85.2 ± 9.7     | 78.4 ± 13.9    |
+</details>
+
+
+### 💡 Notes
+
+- TextoMorph (1): Without Text Extraction and Generation, Text-Driven Contrastive Learning, and Targeted Data Augmentation.
+- TextoMorph (2): With Text Extraction and Generation only.
+- TextoMorph (3): With Text Extraction and Generation and Text-Driven Contrastive Learning.
+- TextoMorph (4): With Text Extraction and Generation, Text-Driven Contrastive Learning, and Targeted Data Augmentation.
 
 ## 3. Evaluation
 
