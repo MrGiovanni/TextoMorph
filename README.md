@@ -142,7 +142,7 @@ python train.py dataset.name=liver_tumor dataset.data_root_path=$datapath datase
 > - TextoMorph (3): With Text Extraction and Generation and Text-Driven Contrastive Learning.
 > - TextoMorph (4): With Text Extraction and Generation, Text-Driven Contrastive Learning, and Targeted Data Augmentation.
 
-#### 2.0 Download Text-Driven Diffusion Models (from Step 1)
+#### 2.1 Download Text-Driven Diffusion Models (from Step 1)
 
 ```bash
 
@@ -155,7 +155,7 @@ wget https://huggingface.co/Alena-Xinran/DescriptiveTumor/resolve/main/descripti
 
 cd ../..
 ```
-#### 2.1 Start Training
+#### 2.2 Start Training
 ```bash
 cd Segmentation
 
