@@ -25,7 +25,7 @@ We introduce TextoMorph, a novel text-driven approach that allows textual contro
 <sup>6</sup> University of Chinese Academy of Sciences  <sup>7</sup> National University of Singapore  
 <sup>8</sup> NVIDIA  <sup>9</sup> University of Bologna  <sup>10</sup> Italian Institute of Technology  <sup>11</sup> University of California, San Francisco <br/>
 IEEE TMI 2026 <br/>
-<a href='https://arxiv.org/pdf/2412.18589'><img src='https://img.shields.io/badge/Paper-PDF-purple'></a>
+<a href='https://www.cs.jhu.edu/~zongwei/publication/li2024text.pdf'><img src='https://img.shields.io/badge/Paper-PDF-purple'></a>
 
 **We collect paper related to medical data synthesis in [Awesome Synthetic Tumors](https://github.com/MrGiovanni/SyntheticTumors/blob/main/AWESOME.md) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)**
 
